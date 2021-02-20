@@ -9,9 +9,12 @@ namespace StateCensusAnalyser
     public class CensusAnalyser
     {
         //enum for creating instance for multiple countries
+        /// <summary>
+        /// Here i am taking only one Country for Simplicity.
+        /// </summary>
         public enum Country
         {
-            INDIA
+            INDIA,US,
         }
         // Dictionary to store the data from the CSV files
         Dictionary<string, CensusDTO> dataMap;

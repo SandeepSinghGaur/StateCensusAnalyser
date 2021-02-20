@@ -6,6 +6,9 @@ using System.Text;
 
 namespace StateCensusAnalyser
 {
+    /// <summary>
+    /// its our Factory Method Which return object IndianStateAdaptor Class
+    /// </summary>
     public class CSVAdapterFactory
     {
         /// <summary>
@@ -22,9 +25,12 @@ namespace StateCensusAnalyser
             {
                 case (CensusAnalyser.Country.INDIA):
                     return new IndianCensusAdaptor().LoadCensusData(csvFilePath, dataHeaders);
+                case (CensusAnalyser.Country.US):
+                    return new IndianCensusAdaptor().LoadCensusData(csvFilePath, dataHeaders);
                 default:
                     throw new CensusAnalyserException("No such country", CensusAnalyserException.ExceptionType.NO_SUCH_COUNTRY);
             }
+            
         }
     }
 }

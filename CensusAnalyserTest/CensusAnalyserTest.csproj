@@ -13,10 +13,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="CSVFiles\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\StateCensusAnalyser\StateCensusAnalyser.csproj" />
   </ItemGroup>
 

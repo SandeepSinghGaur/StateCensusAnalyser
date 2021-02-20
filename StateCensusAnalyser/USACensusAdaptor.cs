@@ -1,13 +1,16 @@
 ﻿using StateCensusAnalyser.DTO;
 using StateCensusAnalyser.POCO;
 using System;
+using StateCensusAnalyser.DTO;
+using StateCensusAnalyser.POCO;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
+
 namespace StateCensusAnalyser
 {
-   public class IndianCensusAdaptor:CensusAdapter
+   public class USACensusAdaptor: CensusAdapter
     {
         string[] censusData;
         public Dictionary<string, CensusDTO> dataMap;

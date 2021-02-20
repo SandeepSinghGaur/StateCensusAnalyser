@@ -21,6 +21,15 @@ namespace StateCensusAnalyser.DTO
         public double landArea;
         public double populationDensity;
         public double housingDensity;
+        public string usaId;
+        public string usaState;
+        public long usaPopulation;
+        public long usaHousingUnits;
+        public double usaTotalArea;
+        public double usaWaterArea;
+        public double usaLandArea;
+        public double usaDensity;
+        public double usaHousingDensity;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="CensusDTO"/> class.
@@ -45,6 +54,19 @@ namespace StateCensusAnalyser.DTO
             this.area = censusDataDAO.area;
             this.density = censusDataDAO.density;
         }
+        public CensusDTO(USADataDAO usaDataDao)
+        {
+            this.usaId = usaDataDao.Id;
+            this.usaState = usaDataDao.state;
+            this.usaPopulation = usaDataDao.population;
+            this.usaHousingUnits = usaDataDao.housingUnits;
+            this.usaTotalArea = usaDataDao.totalArea;
+            this.usaWaterArea = usaDataDao.waterArea;
+            this.usaLandArea = usaDataDao.landArea;
+            this.usaDensity = usaDataDao.density;
+            this.usaHousingDensity = usaDataDao.housingDensity;
+        }
     }
 }
+
 

@@ -9,6 +9,7 @@ namespace CensusAnalyserTest
     {
         static string indiaStateCensusHeaders = "State,Population,AreaInSqKm,DensityPerSqKm";
         static string indiaStateCodeHeaders = "SrNo,State Name,TIN,StateCode";
+        static string usaSatateCodeHeaders = "State Id,State,Population,Housing units,Total area,Water area,Land area,Population Density,Housing Density";
         static string indiaStateCensusFilePath = @"G:\Repos\StateCensusAnalyser\CensusAnalyserTest\CSVFiles\IndiaStateCensusData.csv";
         static string indiaStateCodeFilePath = @"G:\Repos\StateCensusAnalyser\CensusAnalyserTest\CSVFiles\IndiaStateCode.csv";
         static string wrongIndianStateCensusFilePath = @"G:\Repos\StateCensusAnalyser\CensusAnalyserTest\CSVFiles\IndiaStatCode.csv";
@@ -19,10 +20,14 @@ namespace CensusAnalyserTest
         static string wrongIndianStateCodeFileExtension = @"G:\Repos\StateCensusAnalyser\CensusAnalyserTest\CSVFiles\WrongIndiaStateCode.txt";
         static string wrongIndianStateCodeDelimiter = @"G:\Repos\StateCensusAnalyser\CensusAnalyserTest\CSVFiles\DelimiterIndiaStateCode.csv";
         static string wrongHeaderIndiaStateCodeFile = @"G:\Repos\StateCensusAnalyser\CensusAnalyserTest\CSVFiles\WrongIndiaStateCode.csv";
+        static string USACensusFilePath = @"G:\Repos\StateCensusAnalyser\CensusAnalyserTest\CSVFiles\USCensusData.csv";
+        static string wrongUSACensusDelimiter = @"G:\Repos\StateCensusAnalyser\CensusAnalyserTest\CSVFiles\DelemeterUSCensusData.csv";
+        static string wrongUSACensusFilePath = @"G:\Repos\StateCensusAnalyser\CensusAnalyserTest\CSVFiles\USCensussdData.csv";
         CensusAnalyser censusAnalyser;
 
         Dictionary<string, CensusDTO> toatlRecord;
         Dictionary<string, CensusDTO> stateRecord;
+
 
         [SetUp]
         public void Setup()
@@ -144,7 +149,60 @@ namespace CensusAnalyserTest
                                     censusAnalyser.LoadCensusData(CensusAnalyser.Country.INDIA, wrongHeaderIndiaStateCodeFile, indiaStateCodeHeaders));
             Assert.AreEqual(CensusAnalyserException.ExceptionType.INCORRECT_HEADER, censusException.exceptionType);
         }
+        /// <summary>
+        /// TC 3.1
+        /// Givens the USA census data when readed should return census data.
+        /// </summary>
+        [Test]
+        public void GivenUSACensusData_WhenReaded_ShouldReturnCensusData()
+        {
+            toatlRecord = censusAnalyser.LoadCensusData(CensusAnalyser.Country.US, USACensusFilePath, usaSatateCodeHeaders);
+            Assert.AreEqual(50, toatlRecord.Count);
+        }
+        /// <summary>
+        /// TC 3.2
+        /// Givens the wrong USA census data file when readed should return exception.
+        /// </summary>
+        [Test]
+        public void GivenWrongUSACensusDataFile_WhenReaded_ShouldReturnException()
+        {
+            var censusException = Assert.Throws<CensusAnalyserException>(() =>
+                                    censusAnalyser.LoadCensusData(CensusAnalyser.Country.US, wrongUSACensusFilePath, usaSatateCodeHeaders));
+            Assert.AreEqual(CensusAnalyserException.ExceptionType.FILE_NOT_FOUND, censusException.exceptionType);
+        }
+        /// <summary>
+        /// TC 3.3
+        /// Givens the wrong USA census data file type when readed should return custom exception.
+        /// </summary>
+        [Test]
+        public void GivenWrongUSACensusDataFileType_WhenReaded_ShouldReturnCustomException()
+        {
+            var censusException = Assert.Throws<CensusAnalyserException>(() =>
+                                    censusAnalyser.LoadCensusData(CensusAnalyser.Country.US, wrongUSACensusFilePath, usaSatateCodeHeaders));
+            Assert.AreEqual(CensusAnalyserException.ExceptionType.FILE_NOT_FOUND, censusException.exceptionType);
+        }
+        /// <summary>
+        /// TC 3.4
+        /// Givens the wrong USA census data file type when readed should return custom exception.
+        /// </summary>
+        [Test]
+        public void GivenWrongUSAACensusDataFileType_WhenReaded_ShouldReturnCustomException()
+        {
+            var censusException = Assert.Throws<CensusAnalyserException>(() =>
+                                    censusAnalyser.LoadCensusData(CensusAnalyser.Country.US, wrongUSACensusFilePath, usaSatateCodeHeaders));
+            Assert.AreEqual(CensusAnalyserException.ExceptionType.FILE_NOT_FOUND, censusException.exceptionType);
+        }
+        /// <summary>
+        /// TC 3.5
+        /// Givens the wrong delimiter USA census file when readed should return exception.
+        /// </summary>
+        [Test]
+        public void GivenWrongHeaderUSACensusFile_WhenReaded_ShouldReturnException()
+        {
+            var censusException = Assert.Throws<CensusAnalyserException>(() =>
+                                    censusAnalyser.LoadCensusData(CensusAnalyser.Country.US, wrongUSACensusDelimiter, usaSatateCodeHeaders));
+            Assert.AreEqual(CensusAnalyserException.ExceptionType.INCORRECT_HEADER, censusException.exceptionType);
+        }
     }
-
 
 }
